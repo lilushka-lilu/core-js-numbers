@@ -50,7 +50,11 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  const result = (value1 + value2) / 2;
+  if (result === Infinity) {
+    return Number.MAX_VALUE;
+  }
+  return result;
 }
 
 /**
@@ -106,11 +110,10 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  const scal =  x1 * y1 + x2 * y2;
-  const length1 = Math.sqrt(x1 ** 2 + y1 ** 2); //Math.hypot(x1, y1)
-  const length2 = Math.sqrt(x2 ** 2 + y2 ** 2); //Math.hypot(x2, y2)
-  const angleRadians = Math.acos(scal / length1 * length2);
-  return angleRadians;
+  const val1 = x1 * x2 + y1 * y2;
+  const val2 = Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2);
+  const d = Math.acos(val1 / val2);
+  return d;
 }
 
 /**
@@ -142,7 +145,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  return Number(value); //parseFloat(value)
+  return Number(value);
 }
 
 /**
@@ -159,7 +162,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  return Math.sqrt(a ** 2 + b ** 2 +c ** 2);
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 /**
@@ -202,7 +205,7 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  for (let i = 2; i < n; i++) {
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
     if (n % i === 0) return false;
   }
   return true;
@@ -304,7 +307,8 @@ function getSumToN(n) {
  */
 function getSumOfDigits(num) {
   const arr = Array.from(String(num), Number);
-  return sum = arr.reduce((acc, n) => acc + n, 0);
+  const sum = arr.reduce((acc, n) => acc + n, 0);
+  return sum;
 }
 
 /**
